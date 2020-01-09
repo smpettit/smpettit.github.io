@@ -1,1 +1,4 @@
 theme: jekyll-theme-cayman
+url: "https://smpettit.github.io"
+plugins:
+  - jekyll-sitemap

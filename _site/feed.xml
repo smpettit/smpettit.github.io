@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Modern IT Blog</title>
+    <description>Thoughts and useful stuff on my journey to being entirely in the cloud.</description>
+    <link>http://0.0.0.0:4000/</link>
+    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 12 Jan 2020 14:51:54 +1300</pubDate>
+    <lastBuildDate>Sun, 12 Jan 2020 14:51:54 +1300</lastBuildDate>
+    <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Setting up the NZ Local Dial Plan in Teams</title>
+        <description>&lt;p&gt;If you’re looking to really maximise Microsoft Teams and turn on the &lt;a href=&quot;https://www.vorco.net/voice/microsoft-teams/&quot;&gt;phone system&lt;/a&gt; features then for New Zealand users you’re probably also going to get push back from...</description>
+        <pubDate>Thu, 09 Jan 2020 16:00:00 +1300</pubDate>
+        <link>http://0.0.0.0:4000/teams/2020/01/09/teams-nz-dial-plan.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/teams/2020/01/09/teams-nz-dial-plan.html</guid>
+        
+        <category>powershell</category>
+        
+        
+        <category>teams</category>
+        
+      </item>
+    
+      <item>
+        <title>Localising Edge for NZ</title>
+        <description>&lt;p&gt;Microsoft are about to release the new &lt;a href=&quot;https://www.microsoftedgeinsider.com/en-gb/&quot;&gt;Edge&lt;/a&gt; browser built on Chromium on January 15th. We’ve been using the Dev channel internally at &lt;a href=&quot;https://www.end2end.co.nz&quot;&gt;End 2 End&lt;/a&gt; and &lt;a...</description>
+        <pubDate>Thu, 09 Jan 2020 15:00:00 +1300</pubDate>
+        <link>http://0.0.0.0:4000/intune/2020/01/09/localising-edge-chromium-nz.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/intune/2020/01/09/localising-edge-chromium-nz.html</guid>
+        
+        <category>edge</category>
+        
+        
+        <category>intune</category>
+        
+      </item>
+    
+      <item>
+        <title>Bulk updating Azure AD user details</title>
+        <description>&lt;p&gt;When we on-board customers to &lt;a href=&quot;https://www.end2end.co.nz/services/microsoft-365/&quot;&gt;Microsoft 365&lt;/a&gt; one of the first things we do is look to use Azure AD as the source of truth for user contact details....</description>
+        <pubDate>Thu, 09 Jan 2020 12:00:00 +1300</pubDate>
+        <link>http://0.0.0.0:4000/azuread/2020/01/09/azuread-bulk-updates.html</link>
+        <guid isPermaLink="true">http://0.0.0.0:4000/azuread/2020/01/09/azuread-bulk-updates.html</guid>
+        
+        <category>powershell</category>
+        
+        
+        <category>azuread</category>
+        
+      </item>
+    
+  </channel>
+</rss>

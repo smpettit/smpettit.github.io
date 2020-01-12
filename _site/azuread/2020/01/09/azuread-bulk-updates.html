@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Bulk updating Azure AD user details | Modern IT Blog</title>
+  <meta name="description" content="When we on-board customers to Microsoft 365 one of the first things we do is look to use Azure AD as the source of truth for user contact details. This makes...">
+  
+  <meta name="author" content="Scott Pettit">
+  <meta name="copyright" content="&copy; Scott Pettit 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="When we on-board customers to Microsoft 365 one of the first things we do is look to use Azure AD as the source of truth for user contact details. This makes..." />
+  <meta property="og:url" content="http://0.0.0.0:4000/azuread/2020/01/09/azuread-bulk-updates.html">
+  <meta property="og:site_name" content="Modern IT Blog" />
+  <meta property="og:title" content="Bulk updating Azure AD user details" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://0.0.0.0:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bulk updating Azure AD user details">
+  <meta name="twitter:description" content="When we on-board customers to Microsoft 365 one of the first things we do is look to use Azure AD as the source of truth for user contact details. This makes...">
+  <meta name="twitter:image" content="http://0.0.0.0:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://0.0.0.0:4000/azuread/2020/01/09/azuread-bulk-updates.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://0.0.0.0:4000/azuread/2020/01/09/azuread-bulk-updates.html">
+	<link rel="alternate" type="application/rss+xml" title="Modern IT Blog" href="http://0.0.0.0:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+<!--
+      
+      <span>Modern IT Blog</span>
+      
+-->
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/index.html">Home</a>
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Bulk updating Azure AD user details</h1>
+      <p class="info">by <strong>Scott Pettit</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">January 9, 2020</div>
+  <div class="post-categories">
+  in 
+    <a href="/posts/#azuread">Azuread</a>
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>When we on-board customers to <a href="https://www.end2end.co.nz/services/microsoft-365/">Microsoft 365</a> one of the first things we do is look to use Azure AD as the source of truth for user contact details. This makes implementing Multi-factor Authentication, email signatures etc much easier. Today I wanted to share with you two simple scripts for exporting and importing these details. You can get these scripts from our GitHub repo as well: (https://github.com/end2endnz/scripts/)</p>
+
+<h2 id="exporting-user-details">Exporting User Details</h2>
+
+<p>This will output a nice CSV file that someone can review and update in Excel.</p>
+
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="c">#Requires -Modules AzureAD</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Get tenant ID</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="nv">$tenantId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Read-Host</span><span class="w"> </span><span class="nt">-Prompt</span><span class="w"> </span><span class="s1">'Specify tenant ID'</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Connect to AzureAD PowerShell</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="nf">Connect-AzureAD</span><span class="w"> </span><span class="nt">-TenantId</span><span class="w"> </span><span class="nv">$tenantId</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Collect user information</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="s2">"Collecting user information..."</span><span class="w">
+</span><span class="nv">$Output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UserDetails.csv"</span><span class="w">
+</span><span class="nv">$Results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">@()</span><span class="w">
+</span><span class="nv">$AADUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Get-AzureADUser</span><span class="w"> </span><span class="nt">-All</span><span class="w"> </span><span class="nv">$True</span><span class="w">
+
+</span><span class="kr">foreach</span><span class="p">(</span><span class="nv">$User</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$AADUsers</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nv">$Properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="c">#91;ordered] @{</span><span class="w">
+        </span><span class="nf">DisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">DisplayName</span><span class="w">
+        </span><span class="nx">UserPrincipalName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w">
+        </span><span class="nx">CompanyName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">CompanyName</span><span class="w">
+        </span><span class="nx">JobTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">JobTitle</span><span class="w">
+        </span><span class="nx">Department</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">Department</span><span class="w">
+        </span><span class="nx">Landline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">TelephoneNumber</span><span class="w">
+        </span><span class="nx">Mobile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">Mobile</span><span class="w">
+        </span><span class="nx">StreetAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">StreetAddress</span><span class="w">
+        </span><span class="nx">City</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">City</span><span class="w">
+        </span><span class="nx">Country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">Country</span><span class="w">
+        </span><span class="nx">AccountEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="o">.</span><span class="nf">AccountEnabled</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nv">$Results</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nf">New-Object</span><span class="w"> </span><span class="nx">psobject</span><span class="w"> </span><span class="nt">-Property</span><span class="w"> </span><span class="nv">$Properties</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Save results to CSV</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="nv">$Results</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">Export-Csv</span><span class="w"> </span><span class="nt">-NoTypeInformation</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="nv">$Output</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Disconnect from AzureAD</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="nf">Disconnect-AzureAD</span></code></pre></figure>
+
+<h2 id="importing-user-details">Importing User Details</h2>
+
+<p>This script bulk updates to whatever is in your CSV file, so before you do this check over the CSV file, especially if you got someone else to update the CSV file. Phone numbers should be in E.164 format (+<countrycode> <areacode> <phonenumber>).</phonenumber></areacode></countrycode></p>
+
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="c">#Requires -Modules AzureAD</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Get tenant ID</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="nv">$tenantId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Read-Host</span><span class="w"> </span><span class="nt">-Prompt</span><span class="w"> </span><span class="s1">'Specify tenant ID'</span><span class="w">
+</span><span class="nv">$userCsv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Read-Host</span><span class="w"> </span><span class="nt">-Prompt</span><span class="w"> </span><span class="s1">'Specify path to user CSV file'</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Connect to AzureAD PowerShell</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="nf">Connect-AzureAD</span><span class="w"> </span><span class="nt">-TenantId</span><span class="w"> </span><span class="nv">$tenantId</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Import user information</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="s2">"Importing user information from CSV..."</span><span class="w">
+</span><span class="nv">$users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Import-Csv</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="nv">$userCsv</span><span class="w">
+
+</span><span class="kr">foreach</span><span class="p">(</span><span class="nv">$user</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$users</span><span class="p">){</span><span class="w">
+    </span><span class="kr">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">CompanyName</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-CompanyName</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">CompanyName</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nx">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">Department</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-Department</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">Department</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nx">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">JobTitle</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-JobTitle</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">JobTitle</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nx">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">Landline</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-TelephoneNumber</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">Landline</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nx">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">Mobile</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-Mobile</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">Mobile</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nx">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">StreetAddress</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-StreetAddress</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">StreetAddress</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nx">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">City</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-City</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">City</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="nx">if</span><span class="p">(</span><span class="nv">$user</span><span class="o">.</span><span class="nf">Country</span><span class="p">){</span><span class="w">
+        </span><span class="nf">Set-AzureADUser</span><span class="w"> </span><span class="nt">-ObjectId</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">UserPrincipalName</span><span class="w"> </span><span class="nt">-Country</span><span class="w"> </span><span class="nv">$user</span><span class="o">.</span><span class="nf">Country</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c">###</span><span class="w">
+</span><span class="c"># Disconnect from AzureAD</span><span class="w">
+</span><span class="c">###</span><span class="w">
+</span><span class="nf">Disconnect-AzureAD</span></code></pre></figure>
+
+</article>
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Bulk+updating+Azure+AD+user+details&url=http%3A%2F%2F0.0.0.0%3A4000%2Fazuread%2F2020%2F01%2F09%2Fazuread-bulk-updates.html&via=smpettit"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fazuread%2F2020%2F01%2F09%2Fazuread-bulk-updates.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Modern IT Blog</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/index.html">Home</a>
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        
+          
+          <li>
+            <a href="https://twitter.com/smpettit" title="Follow me on Twitter">
+              <i class="fa fa-twitter"></i>
+              <span class="username">smpettit</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://www.linkedin.com/in/scottpettit/" title="Connect with me on LinkedIn">
+              <i class="fa fa-linkedin"></i>
+              <span class="username">Scott Pettit</span>
+            </a>
+          </li>
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">Thoughts and useful stuff on my journey to being entirely in the cloud.</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
